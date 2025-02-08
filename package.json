@@ -14,7 +14,9 @@
     "format": "biome format --fix",
     "lint:html": "markuplint -p 'src/**/*.tsx'",
     "lint:style": "stylelint '**/*.{css,scss,sass}'",
-    "lint:style:fix": "stylelint --fix '**/*.{css,scss,sass}'"
+    "lint:style:fix": "stylelint --fix '**/*.{css,scss,sass}'",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@react-router/node": "^7.1.5",
@@ -29,11 +31,17 @@
     "@markuplint/jsx-parser": "^4.7.15",
     "@markuplint/react-spec": "^4.5.15",
     "@react-router/dev": "^7.1.5",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^20",
-    "@types/react": "^19.0.1",
-    "@types/react-dom": "^19.0.1",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@vitest/coverage-v8": "^3.0.5",
     "concurrently": "^9.1.2",
     "happy-css-modules": "^3.2.0",
+    "jsdom": "^26.0.0",
     "markuplint": "^4.11.5",
     "react-router-devtools": "^1.1.0",
     "sass": "^1.84.0",
@@ -43,6 +51,7 @@
     "stylelint-no-unsupported-browser-features": "^8.0.4",
     "typescript": "^5.7.2",
     "vite": "^5.4.11",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.5"
   }
 }

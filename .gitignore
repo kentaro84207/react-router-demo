@@ -7,3 +7,6 @@
 
 # Generated files
 .generated/
+
+# Vitest coverage
+coverage/
