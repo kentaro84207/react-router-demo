@@ -11,7 +11,10 @@
     "hcm:w": "hcm -w 'app/**/*.module.{css,scss,less}' -o .generated/types",
     "check": "biome check --fix",
     "lint": "biome lint --fix",
-    "format": "biome format --fix"
+    "format": "biome format --fix",
+    "lint:html": "markuplint -p 'src/**/*.tsx'",
+    "lint:style": "stylelint '**/*.{css,scss,sass}'",
+    "lint:style:fix": "stylelint --fix '**/*.{css,scss,sass}'"
   },
   "dependencies": {
     "@react-router/node": "^7.1.5",
@@ -23,12 +26,15 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@markuplint/jsx-parser": "^4.7.15",
+    "@markuplint/react-spec": "^4.5.15",
     "@react-router/dev": "^7.1.5",
     "@types/node": "^20",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",
     "concurrently": "^9.1.2",
     "happy-css-modules": "^3.2.0",
+    "markuplint": "^4.11.5",
     "react-router-devtools": "^1.1.0",
     "sass": "^1.84.0",
     "sass-embedded": "^1.83.4",

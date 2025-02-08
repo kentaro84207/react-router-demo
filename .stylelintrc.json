@@ -1,6 +1,8 @@
 {
   "extends": "stylelint-config-standard-scss",
   "plugins": ["stylelint-no-unsupported-browser-features"],
-  "rules": {},
+  "rules": {
+    "selector-class-pattern": null
+  },
   "ignoreFiles": []
 }
