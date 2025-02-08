@@ -4,9 +4,11 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
-    "dev": "react-router dev",
+    "dev": "concurrently \"react-router dev\" \"npm run hcm:w\"",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "hcm": "hcm 'app/**/*.module.{css,scss,less}' -o .generated/types",
+    "hcm:w": "hcm -w 'app/**/*.module.{css,scss,less}' -o .generated/types"
   },
   "dependencies": {
     "@react-router/node": "^7.1.5",
@@ -18,12 +20,14 @@
   },
   "devDependencies": {
     "@react-router/dev": "^7.1.5",
-    "@tailwindcss/vite": "^4.0.0",
     "@types/node": "^20",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",
+    "concurrently": "^9.1.2",
+    "happy-css-modules": "^3.2.0",
     "react-router-devtools": "^1.1.0",
-    "tailwindcss": "^4.0.0",
+    "sass": "^1.84.0",
+    "sass-embedded": "^1.83.4",
     "typescript": "^5.7.2",
     "vite": "^5.4.11",
     "vite-tsconfig-paths": "^5.1.4"
