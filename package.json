@@ -19,6 +19,7 @@
     "react-router": "^7.1.5"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@react-router/dev": "^7.1.5",
     "@types/node": "^20",
     "@types/react": "^19.0.1",
