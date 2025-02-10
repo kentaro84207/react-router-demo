@@ -1,23 +1,20 @@
 import type { FC } from "react";
 import { Link } from "react-router";
-import type { Breed } from "~/features/cats/types";
+import type { Cat } from "~/features/cats/types";
 import styles from "./index.module.scss";
 
 type Props = {
-  card: Breed;
+  cat: Cat;
 };
 
-export const Card: FC<Props> = ({ card }) => {
+export const Card: FC<Props> = ({ cat }) => {
+  const breed = cat.breeds[0];
+
   return (
     <div className={styles.module}>
-      <h2>{card.name}</h2>
-      <img
-        src={`https://cdn2.thecatapi.com/images/${card.reference_image_id}.jpg`}
-        alt={card.name}
-        className={styles.image}
-      />
-      <p className={styles.description}>{card.description}</p>
-      <Link to={`/cats/${card.id}`}>View details →</Link>
+      <h2>{breed.name}</h2>
+      <img src={cat.url} alt="" className={styles.image} />
+      <Link to={`/breeds/${breed.id}`}>View Breed →</Link>
     </div>
   );
 };

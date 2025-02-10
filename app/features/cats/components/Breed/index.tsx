@@ -1,39 +1,39 @@
 import type { FC } from "react";
-import type { Breed } from "../../types";
+import type { Breed as BreedType } from "../../types";
 import styles from "./index.module.scss";
 
 type Props = {
-  cat: Breed;
+  breed: BreedType;
 };
 
-export const CatDetail: FC<Props> = ({ cat }) => {
+export const Breed: FC<Props> = ({ breed }) => {
   return (
     <div className={styles.module}>
       <img
-        src={`https://cdn2.thecatapi.com/images/${cat.reference_image_id}.jpg`}
-        alt={cat.name}
+        src={`https://cdn2.thecatapi.com/images/${breed.reference_image_id}.jpg`}
+        alt={breed.name}
         className={styles.image}
       />
       <dl className={styles.list}>
         <div>
           <dt className={styles.dt}>Name</dt>
-          <dd>{cat.name}</dd>
+          <dd>{breed.name}</dd>
         </div>
         <div>
           <dt className={styles.dt}>Description</dt>
-          <dd>{cat.description}</dd>
+          <dd>{breed.description}</dd>
         </div>
         <div>
           <dt className={styles.dt}>Life Span</dt>
-          <dd>{cat.life_span}</dd>
+          <dd>{breed.life_span}</dd>
         </div>
         <div>
           <dt className={styles.dt}>Origin</dt>
-          <dd>{cat.origin}</dd>
+          <dd>{breed.origin}</dd>
         </div>
         <div>
           <dt className={styles.dt}>Temperament</dt>
-          <dd>{cat.temperament}</dd>
+          <dd>{breed.temperament}</dd>
         </div>
       </dl>
     </div>

@@ -1,8 +1,8 @@
-import type { Breed } from "../types";
+import type { Cat } from "../types";
 
-export const getCats = async (): Promise<Breed[]> => {
+export const getCats = async (): Promise<Cat[]> => {
   const response = await fetch(
-    "https://api.thecatapi.com/v1/breeds?limit=9",
+    "https://api.thecatapi.com/v1/images/search?limit=9&has_breeds=true",
     {
       headers: {
         "x-api-key": process.env.API_KEY || "",

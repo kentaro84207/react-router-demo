@@ -1,6 +1,6 @@
 import type { Breed } from "../types";
 
-export const getCat = async (breedId: string): Promise<Breed> => {
+export const getBreed = async (breedId: string): Promise<Breed> => {
   const response = await fetch(
     `https://api.thecatapi.com/v1/breeds/${breedId}`,
     {
