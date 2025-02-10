@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import { Link } from "react-router";
 import type { Breed } from "~/features/cats/types";
 import styles from "./index.module.scss";
 
@@ -7,8 +8,6 @@ type Props = {
 };
 
 export const Card: FC<Props> = ({ card }) => {
-  console.log(card);
-  // https://cdn2.thecatapi.com/images/_6x-3TiCA.jpg
   return (
     <div className={styles.module}>
       <h2>{card.name}</h2>
@@ -18,6 +17,7 @@ export const Card: FC<Props> = ({ card }) => {
         className={styles.image}
       />
       <p className={styles.description}>{card.description}</p>
+      <Link to={`/cats/${card.id}`}>View details →</Link>
     </div>
   );
 };

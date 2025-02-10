@@ -8,6 +8,7 @@ import {
 export default [
   layout("layouts/default/index.tsx", [
     index("routes/home/index.tsx"),
-    route("about", "routes//about/index.tsx"),
+    route("cats/:breedId", "routes/cats/index.tsx"),
+    route("about", "routes/about/index.tsx"),
   ]),
 ] satisfies RouteConfig;
