@@ -10,3 +10,5 @@
 
 # Vitest coverage
 coverage/
+
+.env
