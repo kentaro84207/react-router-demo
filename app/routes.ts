@@ -10,5 +10,7 @@ export default [
     index("routes/home/route.tsx"),
     route("breeds/:breedId", "routes/breeds/route.tsx"),
     route("about", "routes/about/route.tsx"),
+    route("contact", "routes/contact/route.tsx"),
+    route("login", "routes/login/route.tsx"),
   ]),
 ] satisfies RouteConfig;
