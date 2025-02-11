@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+import { Await } from "react-router";
 import { getCats } from "~/features/cats/api/getCats";
 import { CatsList } from "~/features/cats/components/CatsList";
 import type { Route } from "./+types/route";
@@ -8,7 +10,7 @@ export function meta() {
 }
 
 export async function loader() {
-  const cats = await getCats();
+  const cats = getCats();
   if (!cats) {
     throw new Error("Failed to load cats");
   }
@@ -21,7 +23,9 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   return (
     <div className={styles.page}>
       <h1>Welcome to Cats Router!</h1>
-      <CatsList catsList={cats} />
+      <Suspense fallback={<div>読み込み中...</div>}>
+        <Await resolve={cats}>{(cats) => <CatsList catsList={cats} />}</Await>
+      </Suspense>
     </div>
   );
 }
