@@ -1,0 +1,18 @@
+.header {
+  padding: 20px;
+  border-bottom: 1px solid #000;
+}
+
+.nav{
+  display: flex;
+  justify-content: space-between;
+}
+
+.navList {
+  display: flex;
+  gap: 1rem;
+}
+
+.content {
+  padding: 20px;
+}

@@ -1,0 +1,22 @@
+.module {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid #000;
+  padding: 16px;
+}
+
+.description {
+  // 3行まで表示し、それ以降は省略記号で表示
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.image {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+}
