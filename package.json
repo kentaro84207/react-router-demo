@@ -16,7 +16,9 @@
     "lint:style": "stylelint '**/*.{css,scss,sass}'",
     "lint:style:fix": "stylelint --fix '**/*.{css,scss,sass}'",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@conform-to/react": "^1.2.2",
@@ -30,9 +32,17 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@chromatic-com/storybook": "^3.2.4",
     "@markuplint/jsx-parser": "^4.7.15",
     "@markuplint/react-spec": "^4.5.15",
     "@react-router/dev": "^7.1.5",
+    "@storybook/addon-essentials": "^8.5.3",
+    "@storybook/addon-interactions": "^8.5.3",
+    "@storybook/addon-onboarding": "^8.5.3",
+    "@storybook/blocks": "^8.5.3",
+    "@storybook/react": "^8.5.3",
+    "@storybook/react-vite": "^8.5.3",
+    "@storybook/test": "^8.5.3",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
@@ -49,6 +59,7 @@
     "react-router-devtools": "^1.1.0",
     "sass": "^1.84.0",
     "sass-embedded": "^1.83.4",
+    "storybook": "^8.5.3",
     "stylelint": "^16.14.1",
     "stylelint-config-standard-scss": "^14.0.0",
     "stylelint-no-unsupported-browser-features": "^8.0.4",
