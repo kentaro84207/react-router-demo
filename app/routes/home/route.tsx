@@ -1,6 +1,6 @@
 import { getCats } from "~/features/cats/api/getCats";
-import type { Route } from "./+types";
 import { CatsList } from "~/features/cats/components/CatsList";
+import type { Route } from "./+types/route";
 import styles from "./route.module.scss";
 
 export function meta() {

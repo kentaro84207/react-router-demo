@@ -1,6 +1,6 @@
 import { getBreed } from "~/features/cats/api/getBreed";
 import { Breed } from "~/features/cats/components/Breed";
-import type { Route } from "./+types";
+import type { Route } from "./+types/route";
 import styles from "./route.module.scss";
 
 export function meta() {
