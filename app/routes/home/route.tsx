@@ -1,6 +1,7 @@
 import { getCats } from "~/features/cats/api/getCats";
 import type { Route } from "./+types";
-import HomePage from "./page";
+import { CatsList } from "~/features/cats/components/CatsList";
+import styles from "./route.module.scss";
 
 export function meta() {
   return [{ title: "Cats | Home" }];
@@ -17,5 +18,10 @@ export async function loader() {
 export default function Home({ loaderData }: Route.ComponentProps) {
   const { cats } = loaderData;
 
-  return <HomePage cats={cats} />;
+  return (
+    <div className={styles.page}>
+      <h1>Welcome to Cats Router!</h1>
+      <CatsList catsList={cats} />
+    </div>
+  );
 }
