@@ -16,15 +16,11 @@ const { getSession, commitSession, destroySession } =
 
       // これらはすべてオプションです
       domain: "localhost",
-      // Expires も設定できます（ただし、maxAge を組み合わせて使用すると、maxAge がオーバーライドされます）。
-      // この方法は、`new Date` がサーバーのデプロイごとに 1 つの日付のみを作成し、将来の動的な日付を作成しないため、推奨されないことに注意してください。
-      //
-      // expires: new Date(Date.now() + 60_000),
       httpOnly: true,
-      maxAge: 60,
+      maxAge: 60 * 60 * 24 * 7,
       path: "/",
       sameSite: "lax",
-      // secrets: ["s3cret1"],
+      secrets: ["s3cret1"],
       secure: true,
     },
   });
