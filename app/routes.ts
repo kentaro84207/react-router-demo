@@ -13,5 +13,6 @@ export default [
     route("contact", "routes/contact/route.tsx"),
     route("login", "routes/login/route.tsx"),
   ]),
-  route("test", "routes/test.ts")
+  route("test", "routes/test.ts"),
+  route("/logout", "routes/login/logout.tsx"),
 ] satisfies RouteConfig;

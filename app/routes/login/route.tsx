@@ -1,9 +1,12 @@
 import { getFormProps, getInputProps, useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
-import { Form, redirect, useActionData } from "react-router";
+import { Form, useActionData } from "react-router";
 import type { ActionFunctionArgs } from "react-router";
-
+import { data, redirect } from "react-router";
 import { z } from "zod";
+import type { Route } from "./+types/route";
+
+import { commitSession, getSession } from "~/sessions.server";
 
 const schema = z.object({
   email: z.string().email(),
@@ -17,8 +20,21 @@ const login = async (data: {
   remember?: boolean;
 }) => {
   console.table(data);
-  return { logged: true };
+  return { token: "123456" };
 };
+
+export async function loader({ request }: Route.LoaderArgs) {
+  const session = await getSession(request.headers.get("Cookie"));
+
+  return data(
+    { error: session.get("error") },
+    {
+      headers: {
+        "Set-Cookie": await commitSession(session),
+      },
+    },
+  );
+}
 
 export default function Login() {
   const lastResult = useActionData<typeof action>();
@@ -61,6 +77,7 @@ export default function Login() {
 }
 
 export async function action({ request }: ActionFunctionArgs) {
+  const session = await getSession(request.headers.get("Cookie"));
   const formData = await request.formData();
   const submission = parseWithZod(formData, { schema });
 
@@ -68,13 +85,28 @@ export async function action({ request }: ActionFunctionArgs) {
     return submission.reply();
   }
 
-  const loginResult = await login(submission.value);
+  const { token } = await login(submission.value);
 
-  if (!loginResult.logged) {
-    return submission.reply({
-      formErrors: ["Failed to login. Please try again later."],
+  if (!token) {
+    // return submission.reply({
+    //   formErrors: ["Failed to login. Please try again later."],
+    // });
+    session.flash("error", "ユーザー名/パスワードが無効です");
+
+    // エラーが発生したログインページにリダイレクトします。
+    return redirect("/login", {
+      headers: {
+        "Set-Cookie": await commitSession(session),
+      },
     });
   }
 
-  return redirect('/');
+  session.set("token", token);
+
+  // ログインに成功したので、ホームページに送信します。
+  return redirect("/", {
+    headers: {
+      "Set-Cookie": await commitSession(session),
+    },
+  });
 }
