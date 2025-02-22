@@ -1,7 +1,16 @@
 import { Link, Outlet } from "react-router";
+import { getUserSession } from "~/sessions.server";
+import type { Route } from "./+types/index";
 import styles from "./index.module.scss";
 
-export default function DefaultLayout() {
+export async function loader({ request }: Route.LoaderArgs) {
+  const userId = await getUserSession(request);
+  return { userId };
+}
+
+export default function DefaultLayout({ loaderData }: Route.ComponentProps) {
+  const { userId } = loaderData;
+
   return (
     <div>
       <header className={styles.header}>
@@ -19,14 +28,12 @@ export default function DefaultLayout() {
             <li>
               <Link to="contact">Contact</Link>
             </li>
-            <li>
-              <Link to="login">Login</Link>
-            </li>
+            <li>{userId ? userId : <Link to="login">Login</Link>}</li>
           </ul>
         </nav>
       </header>
       <div className={styles.content}>
-        <Outlet />
+        <Outlet context={{ userId }}/>
       </div>
     </div>
   );

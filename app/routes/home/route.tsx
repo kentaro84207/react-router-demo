@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import { Await } from "react-router";
+import { useUser } from "~/features/auth/hooks/useUser";
 import { getCats } from "~/features/cats/api/getCats";
 import { CatsList } from "~/features/cats/components/CatsList";
-import { getUserSession } from "~/sessions.server";
 import type { Route } from "./+types/route";
 import styles from "./route.module.scss";
 
@@ -10,17 +10,19 @@ export function meta() {
   return [{ title: "Cats | Home" }];
 }
 
-export async function loader({ request }: Route.LoaderArgs) {
-  const userId = getUserSession(request);
+export async function loader() {
+  // const userId = getUserSession(request);
   const cats = getCats();
   if (!cats) {
     throw new Error("Failed to load cats");
   }
-  return { cats, userId };
+  return { cats };
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
-  const { cats, userId } = loaderData;
+  const { cats } = loaderData;
+  // const { userId} = useRouteLoaderData("routes/layouts/default/index");
+  const userId = useUser();
 
   return (
     <div className={styles.page}>
