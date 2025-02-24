@@ -13,10 +13,7 @@ export default [
     route("contact", "routes/contact/route.tsx"),
     route("login", "routes/login/route.tsx"),
 
-    layout("routes/auth/route.tsx", [
-      route("admin", "routes/admin/route.tsx"),
-    ]),
+    layout("routes/auth/route.tsx", [route("admin", "routes/admin/route.tsx")]),
   ]),
-  route("test", "routes/test.ts"),
   route("/logout", "routes/login/logout.tsx"),
 ] satisfies RouteConfig;
