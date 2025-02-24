@@ -51,15 +51,29 @@ export default function Contact() {
     <div className={styles.page}>
       <h1>Contact</h1>
       <Form method="post" {...getFormProps(form)}>
+        {form.errors && (
+          <div>
+            <h2>Error:</h2>
+            <ul>
+              {form.errors.map((error) => (
+                <li key={error}>{error}</li>
+              ))}
+            </ul>
+          </div>
+        )}
         <div className={styles.formControl}>
           <label htmlFor={fields.email.id}>Email</label>
           <input {...getInputProps(fields.email, { type: "email" })} />
-          <div id={fields.email.errorId} className={styles.error}>{fields.email.errors}</div>
+          <div id={fields.email.errorId} className={styles.error}>
+            {fields.email.errors}
+          </div>
         </div>
         <div className={styles.formControl}>
           <label htmlFor={fields.message.id}>Message</label>
           <textarea {...getTextareaProps(fields.message)} />
-          <div id={fields.message.errorId} className={styles.error}>{fields.message.errors}</div>
+          <div id={fields.message.errorId} className={styles.error}>
+            {fields.message.errors}
+          </div>
         </div>
         <button type="submit">Send</button>
       </Form>
@@ -78,7 +92,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const message = await sendMessage(submission.value);
 
-  if (!message.sent) {
+  if (message.sent) {
     return submission.reply({
       formErrors: ["Failed to send the message. Please try again later."],
     });
