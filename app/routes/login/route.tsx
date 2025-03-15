@@ -4,6 +4,7 @@ import { Form, useActionData } from "react-router";
 import type { ActionFunctionArgs } from "react-router";
 import { data, redirect } from "react-router";
 import { z } from "zod";
+import { login } from "~/features/auth/api/getUser.server";
 import type { Route } from "./+types/route";
 
 import { commitSession, getSession } from "~/sessions.server";
@@ -13,15 +14,6 @@ const schema = z.object({
   password: z.string(),
   remember: z.boolean().optional(),
 });
-
-const login = async (data: {
-  email: string;
-  password: string;
-  remember?: boolean;
-}) => {
-  console.table(data);
-  return { token: "123456" };
-};
 
 export async function loader({ request }: Route.LoaderArgs) {
   const session = await getSession(request.headers.get("Cookie"));

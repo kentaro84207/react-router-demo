@@ -1,12 +1,31 @@
 import { http, HttpResponse, graphql } from "msw";
 
-export const handlers = [
+export const userHandler = (status: 200 | 500 = 200) =>
   http.get("https://api.example.com/user", () => {
+    if (status === 500) {
+      return new HttpResponse(null, { status: 500 });
+    }
     return HttpResponse.json({
-      firstName: "John",
-      lastName: "Goodman",
+      id: "1",
+      name: "テストユーザー",
+      email: "test@example.com",
     });
-  }),
+  });
+
+export const loginHandler = (status: 200 | 401 = 200) =>
+  http.post("https://api.example.com/login", async ({ request }) => {
+    const token = "123456";
+    if (status === 401) {
+      return new HttpResponse(null, { status: 401 });
+    }
+    return HttpResponse.json({
+      token,
+    });
+  });
+
+export const handlers = [
+  userHandler(),
+  loginHandler(),
   graphql.query("ListMovies", () => {
     return HttpResponse.json({
       data: {
