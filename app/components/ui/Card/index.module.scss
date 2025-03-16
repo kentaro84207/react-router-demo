@@ -1,3 +1,5 @@
+@use '@styles/mixin' as *;
+
 .module {
   display: flex;
   flex-direction: column;
@@ -19,4 +21,8 @@
   width: 100%;
   height: 200px;
   object-fit: contain;
+
+  @include mq-min(lg) {
+    height: 600px;
+  }
 }

@@ -1,0 +1,21 @@
+@use "sass:map";
+
+// メディアクエリ 内では CSS 変数を利用できないため、SCSS 変数で定義
+// web-design-tokens で定義している値を利用
+// https://github.com/yamap-inc/web-design-tokens/blob/main/tokens/breakpoint/default.json
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoints: (
+    "md": "screen and (min-width: #{$breakpoint-md})",
+    "lg": "screen and (min-width: #{$breakpoint-lg})",
+    "xl": "screen and (min-width: #{$breakpoint-xl})",
+) !default;
+
+/// breakpoint を使ったメディアクエリ（min-width）の mixin
+/// @param {String} $breakpoint - md | lg | xl
+@mixin mq-min($breakpoint) {
+  @media #{map.get($breakpoints, $breakpoint)} {
+      @content;
+  }
+}
