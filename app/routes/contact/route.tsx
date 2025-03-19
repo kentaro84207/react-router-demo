@@ -28,6 +28,13 @@ const schema = z.object({
       .min(1, "メッセージが短すぎます")
       .max(100, "メッセージが長すぎます"),
   ),
+  amount: z
+    .string()
+    .regex(/^\d+$/, { message: "数字のみ入力してください" })
+    .transform((val) => Number(val))
+    .refine((val) => val >= 2000, {
+      message: "金額は2,000円以上である必要があります",
+    }),
 });
 
 const sendMessage = async (data: { email: string; message: string }) => {
@@ -46,6 +53,17 @@ export default function Contact() {
       return parseWithZod(formData, { schema });
     },
   });
+
+  const increaseAmount = () => {
+    const currentAmount = fields.amount.value ? Number(fields.amount.value) : 0;
+    const newAmount = currentAmount + 1000;
+
+    // 金額フィールドのみを更新 - 他のフィールドには影響しない
+    form.update({
+      name: fields.amount.name,
+      value: String(newAmount),
+    });
+  };
 
   return (
     <div className={styles.page}>
@@ -74,6 +92,20 @@ export default function Contact() {
           <div id={fields.message.errorId} className={styles.error}>
             {fields.message.errors}
           </div>
+        </div>
+        <div className={styles.formControl}>
+          <label htmlFor={fields.amount.id}>Amount</label>
+          <input
+            {...getInputProps(fields.amount, { type: "text" })}
+            inputMode="numeric"
+            pattern="\d*"
+          />
+          {fields.amount.errors && (
+            <div style={{ color: "red" }}>{fields.amount.errors}</div>
+          )}
+          <button type="button" onClick={increaseAmount}>
+            +1000
+          </button>
         </div>
         <button type="submit">Send</button>
       </Form>

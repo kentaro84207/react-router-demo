@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
-    "dev": "concurrently \"react-router dev\" \"npm run hcm:w\"",
+    "dev": "concurrently --hide 1 \"react-router dev\" \"npm run hcm:w\"",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
     "hcm": "hcm 'app/**/*.module.{css,scss,less}' -o .generated/types",
